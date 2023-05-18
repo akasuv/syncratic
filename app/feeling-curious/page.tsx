@@ -18,6 +18,7 @@ const FeelingCuriousPage = () => {
         <h2 className="text-3xl font-bold">Neural Networks</h2>
       </div>
       <div className="mb-4 text-gray-600">
+        {`
         Recent years have seen tremendous advances in neural networks, enabling
         them to achieve superhuman performance at narrow tasks like image
         recognition, machine translation and game playing. However, for neural
@@ -63,6 +64,7 @@ const FeelingCuriousPage = () => {
         principles from neuroscience, cognition and machine learning may be
         necessary to achieve truly intelligent artificial neural systems.
         However, the challenges are immense and success is far from guaranteed.
+	`}
       </div>
     </div>
   );
