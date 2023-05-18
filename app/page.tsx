@@ -25,7 +25,7 @@ export default async function Home() {
       >
         {(concepts as Database["public"]["Tables"]["quick_scan"]["Row"][])?.map(
           (concept) => (
-            <QuickScanCard {...concept} />
+            <QuickScanCard key={concept.id} {...concept} />
           )
         )}
       </TopicSection>
