@@ -3,11 +3,11 @@ import React from "react";
 import DeepDiveModal from "../DeepDiveModal";
 
 type QuickScanCardProps = {
-  concept: string;
-  quickScan: string;
+  concept: string | null;
+  content: string | null;
 };
 
-const QuickScanCard = ({ concept, quickScan }: QuickScanCardProps) => {
+const QuickScanCard = ({ concept, content }: QuickScanCardProps) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -19,7 +19,7 @@ const QuickScanCard = ({ concept, quickScan }: QuickScanCardProps) => {
         Quick Scan
       </span>
       <h3 className="text-xl font-bold mb-2 mt-2">{concept}</h3>
-      <p className="text-gray-600">{quickScan}</p>
+      <p className="text-gray-600">{content}</p>
       <div className="mt-4 flex gap-x-4">
         <button
           className="bg-transparent text-black underline"
@@ -34,11 +34,11 @@ const QuickScanCard = ({ concept, quickScan }: QuickScanCardProps) => {
           Feeling Curious
         </a>
       </div>
-      {open && (
+      {open && concept && content && (
         <DeepDiveModal
           isOpen={open}
           title={concept}
-          content={quickScan}
+          content={content}
           onClose={() => setOpen(false)}
         />
       )}
