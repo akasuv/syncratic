@@ -12,8 +12,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function Home() {
   const { data: concepts, error } = await supabase
-    .from("quick_scan")
-    .select("*");
+    .from("industries")
+    .select("*, fields(name)")
+    .eq("id", 23);
 
   console.log({ concepts });
 

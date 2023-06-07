@@ -1,54 +1,30 @@
-const topics = [
-  "Technology",
-  "Business",
-  "Science",
-  "Engineering",
-  "Health",
-  "Education",
-  "Environment",
-  "Government",
-  "Psychology",
-  "Economics",
-  "Sustainability",
-  "Law",
-  "Security",
-  "Philosophy",
-  "Politics",
-  "History",
-  "Social Issues",
-  "Art",
-  "Design",
-  "Culture",
-  "Media",
-  "Transportation",
-  "Agriculture",
-  "Hospitality",
-  "Sports",
-  "Finance",
-  "Marketing",
-  "Communication",
-  "Development",
-  "Innovation",
-  "Creativity",
-  "Problem Solving",
-  "Leadership",
-  "Management",
-  "Teamwork",
-  "Entrepreneurship",
-  "Workplace",
-];
+import { createClient } from "@supabase/supabase-js";
 
-function Topics() {
+const supabaseUrl = "https://ekxacncpbggwxpghqxcc.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY as string;
+const supabase = createClient(supabaseUrl, supabaseKey);
+export const revalidate = 0;
+
+async function Topics() {
+  const { data: industries, error } = await supabase
+    .from("industries")
+    .select("*, fields(id, name)");
+
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-6 px-8">
-      {topics.map((topic) => (
-        <a
-          href="#"
-          key={topic}
-          className="card rounded-sm p-4 border border-black hover:bg-black hover:text-white transition"
-        >
-          <h3 className="text-lg font-medium">{topic}</h3>
-        </a>
+    <div className="pl-8 flex flex-col gap-y-8">
+      {industries?.map((industry) => (
+        <div>
+          <h3 className="text-2xl font-medium">{industry.name}</h3>
+          <ul className="grid grid-cols-3 gap-y-2 mt-4">
+            {industry.fields.map((field) => (
+              <li key={field.id}>
+                <a href={`/field/${field.id}`} className="hover:underline">
+                  {field.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
     </div>
   );
